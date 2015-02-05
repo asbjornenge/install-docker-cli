@@ -1,22 +1,31 @@
-var args  = process.argv.splice(2)
-var path  = require('path')
-var chpr  = require('child_process')
-var utils = require('./utils')
-var meta  = utils.getInstallMeta(args)
+var docker_cli = {
 
-utils.validatePlatform()
+    archMap : {
+        'x64'  : 'x86_64',
+        'ia32' : 'i386'
+    },
 
-require('nugget')(utils.getDockerCliUrl(meta.version), {
-    target  : meta.installPath,
-    verbose : true
-}, function(err) {
-    if (err) { console.error('Error:',err.message); process.exit(1) }
-    var child = chpr.exec('chmod +x '+meta.installPath)
-    child.stdout.on('data', function(data) { console.log(data)   })
-    child.stderr.on('data', function(data) { console.error(data) })
-    child.on('close', function() {
-        console.log('Installed docker-'+meta.version+' to '+path.resolve(meta.installPath))
-        process.exit(0)
-    })
-})
+    platformMap : {
+        'linux'  : 'Linux',
+        'darwin' : 'Darwin'
+    },
 
+    validateCurrentPlatform : function() {
+        var msg;
+        if (!docker_cli.archMap[process.arch])         { msg = 'Unsupported architecture '+process.arch }
+        if (!docker_cli.platformMap[process.platform]) { msg = 'Unsupported platform '+process.platform }
+        return {
+            valid    : typeof msg === 'undefined',
+            msg      : msg,
+            arch     : docker_cli.archMap[process.arch],
+            platform : docker_cli.platformMap[process.platform]
+        }
+    },
+
+    getDockerCliUrl : function(platform, arch, version) {
+        return 'https://get.docker.com/builds/'+platform+'/'+arch+'/docker-'+version
+    }
+
+}
+
+module.exports = docker_cli
