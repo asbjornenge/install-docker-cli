@@ -14,8 +14,9 @@ Easy way to install the docker cli.
 
 ## Changelog
 
-### 1.0.1
+### 1.0.2
 
+* Added missing shebang :stuck_out_tongue_closed_eyes:
 * Added the cli to package.json :see_no_evil:
 
 ### 1.0.0

@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 var args  = process.argv.splice(2)
 var path  = require('path')
 var chpr  = require('child_process')

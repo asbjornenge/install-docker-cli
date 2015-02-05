@@ -1,6 +1,6 @@
 {
   "name": "install-docker-cli",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Easy way to install the docker cli",
   "main": "index.js",
   "bin": "./cli.js",
