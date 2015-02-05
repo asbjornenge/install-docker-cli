@@ -3,6 +3,8 @@ var path  = require('path')
 var chpr  = require('child_process')
 var dcli  = require('./index')
 var utils = require('./cli-utils')
+
+utils.displayHelpMaybe(args)
 var meta  = utils.getInstallMeta(args)
 var valid = dcli.validateCurrentPlatform()
 

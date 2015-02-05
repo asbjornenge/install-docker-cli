@@ -4,7 +4,24 @@ var path = require('path')
 var utils = {
 
     help : function() {
-        console.log('Look ma, Im helping!')
+        var helpText = "USAGE\n    install-docker-cli [VERSION] [PATH]\n\
+VERSION (optional)\n\
+ -> latest\n\
+    1.4.0\n\
+    1.3.1\n\
+    etc.\n\
+PATH (optional)\n\
+ -> ./docker-version\n\
+    /path/to/install/cli\n\
+"
+        console.log(helpText)
+    },
+
+    displayHelpMaybe : function(args) {
+        var needsHelp = false
+        if (args.indexOf('-h') >= 0)    needsHelp = true
+        if (args.indexOf('--help') >=0) needsHelp = true
+        if (needsHelp) { utils.help(); process.exit(0) }
     },
 
     getInstallMeta : function(args) {
