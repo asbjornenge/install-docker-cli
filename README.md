@@ -14,6 +14,10 @@ Easy way to install the docker cli.
 
 ## Changelog
 
+### 1.0.1
+
+* Added the cli to package.json :see_no_evil:
+
 ### 1.0.0
 
 * Initial release :tada:
